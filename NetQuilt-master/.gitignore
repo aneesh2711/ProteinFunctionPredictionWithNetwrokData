@@ -1,0 +1,15 @@
+*.log
+*.pckl
+*.out
+*.tsv
+*.fa
+*.dmp
+*.tab
+*slurm*
+*.png
+*logfile*
+*.pin
+*.phr
+*.psq
+*.txt
+*.pyc

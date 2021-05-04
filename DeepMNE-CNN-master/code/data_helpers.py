@@ -61,7 +61,7 @@ def write_encoded_file(data, file_path):
 	with open(file_path, "w") as f:
 		for line in data:
 			tempLine = ""
-			for i in xrange(len(line)):
+			for i in range(len(line)):
 				tempLine = tempLine + str(line[i]) + "\t"
 			tempLine = tempLine + "\n"
 			f.write('%s'% tempLine)

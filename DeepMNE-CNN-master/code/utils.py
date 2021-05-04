@@ -15,8 +15,8 @@ def extractConstraints(representation):
     mustlink_matrix = np.zeros((yeast_nums, yeast_nums))
     cannotlink_matrix = np.zeros((yeast_nums, yeast_nums))
 
-    for i in xrange(len(representation)):
-        for j in xrange(i):
+    for i in range(len(representation)):
+        for j in range(i):
             distance = pearsonr(representation[i],representation[j])[0] # pearson
             if distance <= 0.3:
                 cannotlink_matrix[i,j] = 1.0

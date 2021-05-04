@@ -8,9 +8,10 @@ import numpy as np
 import tensorflow as tf
 from models import *
 from data_helpers import *
-from validation import cross_validation
+#from validation import cross_validation
+from sklearn.model_selection import cross_validate
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 log_device_placement = True
 
 
@@ -43,8 +44,8 @@ flags.DEFINE_float('percent', 0.05, 'Pecentage of extracting constraints')
 print ('Loading genes...')
 yeast_genes = load_genes('yeast')
 print ('Loading network fusions... ')
-yeast_fusions = load_fusions('yeast')
-# yeast_fusions = load_networks('yeast')
+# yeast_fusions = load_fusions('yeast')
+yeast_fusions = load_networks('yeast')
 
 input_dim = FLAGS.net_dims
 

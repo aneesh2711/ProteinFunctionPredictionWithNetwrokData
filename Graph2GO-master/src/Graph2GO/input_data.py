@@ -74,7 +74,7 @@ def load_data(graph_type, uniprot, args):
 
     if graph_type == "ppi":
         attribute = args.ppi_attributes
-    elif graph_type == "sequence_similarity":
+    elif graph_type == "similarity":
         attribute = args.simi_attributes
         
     if attribute == 0:
@@ -102,13 +102,15 @@ def load_data(graph_type, uniprot, args):
     features = sp.csr_matrix(features)
 
     print('loading graph...')
-    if graph_type == "sequence_similarity":
+    if graph_type == "similarity":
+        print('loading simi graph...')
         filename = os.path.join(args.data_path, args.species, "networks/sequence_similarity.txt")
         adj = load_simi_network(filename, uniprot.shape[0], args.thr_evalue)
     elif graph_type == "ppi":
+        print('loading ppi graph...')
         filename = os.path.join(args.data_path, args.species, "networks/ppi.txt")
-        adj = load_ppi_network(filename, uniprot.shape[0], args.thr_ppi)
-    
+        adj = load_ppi_network(filename, uniprot.shape[0], args.thr_combined)
+        print('loading ppi graph done...')
     adj = sp.csr_matrix(adj)
      
 

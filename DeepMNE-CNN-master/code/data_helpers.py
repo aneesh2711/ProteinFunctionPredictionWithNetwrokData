@@ -6,6 +6,7 @@ import numpy as np
 from sklearn import preprocessing
 
 yeast_nums = 6400
+human_nums = 18362
 
 def load_genes(org):
 	if org == 'yeast':
@@ -17,7 +18,7 @@ def load_genes(org):
 def load_networks(org):
 	num_nets = 6
 	str_nets = ['coexpression', 'cooccurence', 'database', 'experimental', 'fusion', 'neighborhood']
-	adj_nets = np.zeros((num_nets, yeast_nums, yeast_nums))
+	adj_nets = np.zeros((num_nets, human_nums, human_nums))
 	for idx in range(num_nets):
 		path_net = 'data/networks/'+org +'/'+org+'_string_'+str_nets[idx]+'_adjacency.txt'
 		adj_nets[idx] = readNetworks(path_net)
@@ -26,7 +27,7 @@ def load_networks(org):
 def load_fusions(org):
 	num_fusions = 6
 	str_fusions = ['coexpression', 'cooccurence', 'database', 'experimental', 'fusion', 'neighborhood']
-	adj_fusions = np.zeros((num_fusions, yeast_nums, yeast_nums))
+	adj_fusions = np.zeros((num_fusions, human_nums, human_nums))
 	for idx in range(num_fusions):
 		# path_fusion = '/media/userdisk1/jjpeng/xuehansheng/'+org+'_'+str_fusions[idx]+'_rwr.txt'
 		path_fusion = 'data/rwr/'+org+'_'+str_fusions[idx]+'_rwr.txt'
@@ -43,7 +44,7 @@ def readGenes(filepath):
 	return dataSet
 
 def readNetworks(filepath):
-	network = np.zeros([yeast_nums, yeast_nums])
+	network = np.zeros([human_nums, human_nums])
 	for line in open(filepath):
 		line = line.strip()
 		temp = list(map(str,line.split('	')))
@@ -51,7 +52,7 @@ def readNetworks(filepath):
 	return network
 
 def readRWR(filepath):
-	network = np.zeros([yeast_nums,yeast_nums])
+	network = np.zeros([human_nums,human_nums])
 	data = open(filepath, "r")
 	network = [[float(v) for v in line.rstrip('\n').split('\t')] for line in data]
 

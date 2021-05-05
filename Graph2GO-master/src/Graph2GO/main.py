@@ -9,7 +9,7 @@ from collections import defaultdict
 
 from trainGcn import train_gcn
 from trainNN import train_nn
-from trainSVM import train_svm
+# from trainSVM import train_svm
 
 from evaluation import get_results
 
@@ -74,7 +74,8 @@ def train(args):
     print('CC')
     
     if args.supervised == "svm":
-        y_score_cc = train_svm(X_train,Y_train_cc,X_test,Y_test_cc)
+#        y_score_cc = train_svm(X_train,Y_train_cc,X_test,Y_test_cc)
+        print("Skipped")
     elif args.supervised == "nn":
         y_score_cc = train_nn(X_train,Y_train_cc,X_test,Y_test_cc)
     
@@ -118,7 +119,7 @@ if __name__ == "__main__":
     #global parameters
     parser.add_argument('--ppi_attributes', type=int, default=6, help="types of attributes used by ppi.")
     parser.add_argument('--simi_attributes', type=int, default=5, help="types of attributes used by simi.")
-    parser.add_argument('--graphs', type=lambda s:[item for item in s.split(",")], default=['combined','similarity'], help="lists of graphs to use.")    
+    parser.add_argument('--graphs', type=lambda s:[item for item in s.split(",")], default=['ppi','similarity'], help="lists of graphs to use.")    
     parser.add_argument('--species', type=str, default="human", help="which species to use.")
     parser.add_argument('--data_path', type=str, default="../../data/", help="path storing data.")
     parser.add_argument('--thr_combined', type=float, default=0.3, help="threshold for combiend ppi network.")

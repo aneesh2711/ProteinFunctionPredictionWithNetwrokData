@@ -8,8 +8,8 @@ import numpy as np
 import tensorflow as tf
 from models import *
 from data_helpers import *
-#from validation import cross_validation
-from sklearn.model_selection import cross_validate
+from validation import evaluate_performance
+#from sklearn.model_selection import cross_validate
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 log_device_placement = True
@@ -18,14 +18,14 @@ log_device_placement = True
 # Settings
 flags = tf.app.flags
 FLAGS = flags.FLAGS
-flags.DEFINE_string('org', 'yeast', 'Dataset string')  # 'yeast', 'human'
-flags.DEFINE_integer('net_dims', 6400, 'Dimensional number of input networks')
+flags.DEFINE_string('org', 'human', 'Dataset string')  # 'yeast', 'human'
+flags.DEFINE_integer('net_dims', 18362, 'Dimensional number of input networks')
 flags.DEFINE_integer('net_nums', 6, 'Number of input networks')
 flags.DEFINE_list('learning_rate', [0.5, 0.05, 0.05, 0.01], 'Initial learning rate')
 # flags.DEFINE_float('learning_rate', [0.1, 0.01, 0.01], 'Initial learning rate')
 flags.DEFINE_integer('batch_size', 128, 'Initial batch size')
 # flags.DEFINE_integer('epochs', 500, 'Number of epochs to train.')
-flags.DEFINE_list('iter_num', [50000, 10000, 10000, 5000], 'Number of iterations to train')
+flags.DEFINE_list('iter_num', [1000, 10000, 10000, 5000], 'Number of iterations to train')
 # flags.DEFINE_integer('iter_num', [10000, 1000, 1000], 'Number of iterations to train')
 flags.DEFINE_integer('layers_num', 1, 'Number of the whole model')
 flags.DEFINE_list('hidden_dim', [500], 'Number of units in hidden layers')
@@ -42,10 +42,10 @@ flags.DEFINE_float('percent', 0.05, 'Pecentage of extracting constraints')
 
 # load data
 print ('Loading genes...')
-yeast_genes = load_genes('yeast')
+yeast_genes = load_genes('human')
 print ('Loading network fusions... ')
 # yeast_fusions = load_fusions('yeast')
-yeast_fusions = load_networks('yeast')
+yeast_fusions = load_networks('human')
 
 input_dim = FLAGS.net_dims
 
@@ -89,7 +89,7 @@ for idx_layer in range(FLAGS.layers_num):
 # output embedding
 str_nets = ['coexpression', 'cooccurence', 'database', 'experimental', 'fusion', 'neighborhood']
 for idxx in range(FLAGS.net_nums):
-	temp_path = './emb/'+FLAGS.org+'_'+str_nets[idxx]+'_'+FLAGS.optimizer+'_'+str(FLAGS.learning_rate[0])+'_new.txt'
+	temp_path = './emb/'+FLAGS.org+'_'+str_nets[idxx]+'_emb_semiAE.txt'
 	write_encoded_file(emb[idxx], temp_path)
 
 perf = cross_validation(emb, labels)

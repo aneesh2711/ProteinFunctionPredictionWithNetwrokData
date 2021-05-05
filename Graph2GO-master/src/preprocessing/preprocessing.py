@@ -71,9 +71,9 @@ uniprot['mf'] = uniprot['Gene ontology (molecular function)'].apply(get_GO)
 num_cc_before = sum(len(x) for x in uniprot['cc'])
 num_mf_before = sum(len(x) for x in uniprot['mf'])
 num_bp_before = sum(len(x) for x in uniprot['bp'])
-print "number of CCs, before enrich", num_cc_before
-print "number of MFs, before enrich", num_mf_before
-print "number of BPs, before enrich", num_bp_before
+print ("number of CCs, before enrich: "+ str(num_cc_before))
+print ("number of MFs, before enrich: "+ str(num_mf_before))
+print ("number of BPs, before enrich: "+ str(num_bp_before))
 
 
 
@@ -117,9 +117,9 @@ uniprot['bp'] = new_bp
 num_cc_after = sum(len(x) for x in uniprot['cc'])
 num_mf_after = sum(len(x) for x in uniprot['mf'])
 num_bp_after = sum(len(x) for x in uniprot['bp'])
-print "number of CCs, after enrich", num_cc_after
-print "number of MFs, after enrich", num_mf_after
-print "number of BPs, after enrich", num_bp_after
+print ("number of CCs, after enrich: "+ str(num_cc_after))
+print ("number of MFs, after enrich: "+ str(num_mf_after))
+print ("number of BPs, after enrich: "+ str(num_bp_after))
 
 
 

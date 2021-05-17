@@ -383,20 +383,22 @@ def test_leaveout_calculations(alpha, tax_ids, leave_species_out, network_folder
 if __name__ == "__main__":
     # Eukaryotes:
     # python create_block_matrix.py 0.6 4896,4932,9606,10090,7227,3702,6239,10116 ./ ../annot/string_annot/
-    alpha = float(sys.argv[1])
+    #alpha = float(sys.argv[1])
     # tax_ids_2 = ['511145', '7227', '10090', '6239', '4932', '9606']
     # tax_ids_1 = ['553174']
     # tax_ids = ['155864', '199310', '316385', '316407', '511145', '220664', '208964', '553174']
-    tax_ids = sys.argv[2].split(',')
-    network_folder = sys.argv[3]
-    blast_folder = sys.argv[4]
-    block_matrix_folder = sys.argv[5]
+    tax_ids = '9606'
+    #network_folder = sys.argv[3]
+    net_dir = './network_files_no_add/'
+    #blast_folder = sys.argv[4]
+    blast_folder = './blast_files/'
+    #block_matrix_folder = sys.argv[5]
     if network_folder[-1] != '/':
         network_folder = network_folder + '/'
     if blast_folder[-1] != '/':
         blast_folder = blast_folder + '/'
-    if block_matrix_folder[-1] != '/':
-        block_matrix_folder = block_matrix_folder + '/'
-    save_rwr_matrices(tax_ids, network_folder=network_folder)
-    save_block_matrices(alpha, tax_ids, network_folder=network_folder, blast_folder=blast_folder, block_matrix_folder=block_matrix_folder)
+    #if block_matrix_folder[-1] != '/':
+    #    block_matrix_folder = block_matrix_folder + '/'
+    get_single_rwr(tax_ids, network_folder=net_dir)
+    #save_block_matrices(alpha, tax_ids, network_folder=network_folder, blast_folder=blast_folder, block_matrix_folder=block_matrix_folder)
 

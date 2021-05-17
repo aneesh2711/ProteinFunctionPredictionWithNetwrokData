@@ -32,7 +32,7 @@ def process_version_11_annot_file(graph, root_terms, go_path, annot_folder, min_
     jj['molecular_function'] = 0
     jj['biological_process'] = 0
     jj['cellular_component'] = 0
-
+    lines = []
     with open(go_path) as tsvfile:
         reader = csv.reader(tsvfile, delimiter='\t')
         next(reader) # skip header for version 11
@@ -183,7 +183,7 @@ def process_version_10_annot_file(graph, root_terms, evidence_codes, go_path, an
                 f.write("%s\t%s\n" % (chosen_go_IDs[i], go_name))
 
 
-def save_annots(tax_ids, annot_folder='./string_annot/', min_coverage=0.005, max_coverage=0.05, version='11', evidence='all'):
+def save_annots(tax_ids, annot_folder='./string_annot/', min_coverage=0.005, max_coverage=0.05, version='11', evidence='experimental'):
     # read *.obo file
     try:
         graph = obonet.read_obo(open('./go-basic.obo', 'r'))
@@ -201,19 +201,19 @@ def save_annots(tax_ids, annot_folder='./string_annot/', min_coverage=0.005, max
         exit()
 
     if version == '11':
-        go_path = annot_folder + 'all_organisms.GO_2_string.2018.tsv'
+        go_path = annot_folder + 'human.GO_2_string.2018.tsv'
     elif version == '10':
         go_path = annot_folder + 'all_go_knowledge_full.tsv'
-    if not isfile(go_path):
-        print(go_path + ' not found. Downloading and gunzipping it.')
-        if version == '11':
-            subprocess.run(['wget', '-P', annot_folder, 'https://string-db.org/mapping_files/geneontology/all_organisms.GO_2_string.2018.tsv.gz'])
-        elif version == '10':
-            subprocess.run(['wget', '-P', annot_folder, 'http://version10.string-db.org/mapping_files/gene_ontology_mappings/all_go_knowledge_full.tsv.gz'])
-        else:
-            print('Wrong version! Choose \'10\' or \'11\'.')
-            exit()
-        subprocess.run(['gunzip', '-f', go_path + '.gz'])
+    #if not isfile(go_path):
+    #    print(go_path + ' not found. Downloading and gunzipping it.')
+    #    if version == '11':
+    #        subprocess.run(['wget', '-P', annot_folder, 'https://string-db.org/mapping_files/geneontology/all_organisms.GO_2_string.2018.tsv.gz'])
+    #    elif version == '10':
+    #        subprocess.run(['wget', '-P', annot_folder, 'http://version10.string-db.org/mapping_files/gene_ontology_mappings/all_go_knowledge_full.tsv.gz'])
+    #    else:
+    #        print('Wrong version! Choose \'10\' or \'11\'.')
+    #        exit()
+    #    subprocess.run(['gunzip', '-f', go_path + '.gz'])
 
     if version == '11':
         process_version_11_annot_file(graph, root_terms, go_path, annot_folder, min_coverage, max_coverage)
@@ -223,13 +223,13 @@ def save_annots(tax_ids, annot_folder='./string_annot/', min_coverage=0.005, max
     
 
 if __name__ == '__main__':
-    tax_ids = sys.argv[1].split(',')
-    annot_folder = sys.argv[2]
-    if annot_folder[-1] != '/':
-        annot_folder += '/'
-    if len(sys.argv) > 3:
-        string_version = sys.argv[3]
-    else:
-        string_version = '11'
-    save_annots(tax_ids, annot_folder=annot_folder, version=string_version)
+    tax_ids = sys.argv[1]
+    #annot_folder = sys.argv[2]
+    #if annot_folder[-1] != '/':
+    #    annot_folder += '/'
+    #if len(sys.argv) > 3:
+    #    string_version = sys.argv[3]
+    #else:
+    string_version = '11'
+    save_annots(tax_ids,  version=string_version)
 

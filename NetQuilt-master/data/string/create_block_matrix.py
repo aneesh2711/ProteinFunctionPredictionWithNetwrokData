@@ -101,8 +101,8 @@ def get_single_rwr(tax_id, network_folder):
 
 def save_single_isorank_block(tax_id_combo, alpha, network_folder, blast_folder, block_matrix_folder, rand_init, ones_init, used_tax_ids=None, version=None, set_iterations=None):
     print('Set iterations inside save_single_isorank_block: ' + str(set_iterations))
-    tax_id_1 = tax_id_combo[0]
-    tax_id_2 = tax_id_combo[1]
+    tax_id_1 = tax_id_combo[0][0]
+    tax_id_2 = tax_id_combo[0][1]
     if used_tax_ids is None: # for left out matrix IsoRank calculation
         block_mat_fname = block_matrix_folder + tax_id_1 + "-" + tax_id_2 + "_alpha_" + str(alpha) + "_block_matrix.pckl"
     else:
@@ -317,15 +317,16 @@ def save_block_matrices(alpha, tax_ids, network_folder='./network_files/', blast
         for jj in range(ii, len(taxa)): # now including species with themselves
             if not ('-leaveout' in taxa[ii] and '-leaveout' in taxa[jj]): # but do not make leaveout in both
                 tax_id_combos.append((taxa[ii], taxa[jj]))
+    print(tax_id_combos)
 
-
-    pool = Pool(int(multiprocessing.cpu_count()))
+    #pool = Pool(int(multiprocessing.cpu_count()))
     print('total combos: ' + str(len(tax_id_combos)))
     print('Set iterations: ' + str(set_iterations))
-    pool.starmap(save_single_isorank_block, zip(tax_id_combos, itertools.repeat(alpha), itertools.repeat(network_folder), 
-        itertools.repeat(blast_folder), itertools.repeat(block_matrix_folder), itertools.repeat(rand_init), 
-        itertools.repeat(ones_init), itertools.repeat(None), itertools.repeat(None), 
-        itertools.repeat(set_iterations))) # this is not the call for leave out species; this is only for non-leaveout. Use "save_left_out_matrix" instead
+    save_single_isorank_block(tax_id_combos,alpha,network_folder,blast_folder,block_matrix_folder,rand_init,ones_init,None,None,set_iterations)
+    #pool.starmap(save_single_isorank_block, zip(tax_id_combos, itertools.repeat(alpha), itertools.repeat(network_folder), 
+    #    itertools.repeat(blast_folder), itertools.repeat(block_matrix_folder), itertools.repeat(rand_init), 
+    #    itertools.repeat(ones_init), itertools.repeat(None), itertools.repeat(None), 
+    #    itertools.repeat(set_iterations))) # this is not the call for leave out species; this is only for non-leaveout. Use "save_left_out_matrix" instead
 
 
 def test_leaveout_calculations(alpha, tax_ids, leave_species_out, network_folder='./network_files/', blast_folder='./blast_files/', block_matrix_folder='./block_matrix_files/'):

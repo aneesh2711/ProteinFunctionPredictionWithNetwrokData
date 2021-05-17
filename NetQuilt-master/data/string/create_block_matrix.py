@@ -393,8 +393,8 @@ if __name__ == "__main__":
     #blast_folder = sys.argv[4]
     blast_folder = './blast_files/'
     #block_matrix_folder = sys.argv[5]
-    if network_folder[-1] != '/':
-        network_folder = network_folder + '/'
+    if net_dir[-1] != '/':
+        net_dir = net_dir + '/'
     if blast_folder[-1] != '/':
         blast_folder = blast_folder + '/'
     #if block_matrix_folder[-1] != '/':

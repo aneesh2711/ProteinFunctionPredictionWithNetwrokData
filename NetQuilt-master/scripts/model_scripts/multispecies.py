@@ -748,14 +748,11 @@ if __name__ == "__main__":
         predicted_net_cv_main(annot_fname, ont, model_name, data_folder, tax_ids, test_tax_id, test_annot_fname, alpha, test_goid_fname, results_path=results_path, block_matrix_folder=block_mat_folder, network_folder=net_folder, use_orig_feats=use_orig_features, use_nn=use_nn, arch_set=arch_set, save_only=save_only, num_hyperparam_sets=num_hyperparam_sets, isorank_diag=isorank_diag)
     elif val == 'full_prediction':
         print('Full prediction setting. Training on all annotated proteins given, predicting on all proteins given.')
-<<<<<<< HEAD
         predict_main(annot_fname, ont, model_name, data_folder, tax_ids, alpha, test_goid_fname, results_path=results_path, block_matrix_folder=block_mat_folder, network_folder=net_folder, arch_set=arch_set)
     elif val == 'list_pred':
         print('Training on all annotated proteins of selected taxa that are not in test set ID list.')
         predict_main(annot_fname, ont, model_name, data_folder, tax_ids, alpha, test_goid_fname, results_path=results_path, block_matrix_folder=block_mat_folder, network_folder=net_folder, arch_set=arch_set, test_set_id_list=args.test_set_id_list)
-=======
-        predict_main(annot_fname, ont, model_name, data_folder, tax_ids, alpha, test_goid_fname, results_path=results_path, block_matrix_folder=block_mat_folder, network_folder=net_folder, arch_set=arch_set, isorank_diag=isorank_diag)
->>>>>>> 2b7fe178f674e612fff285ca36d9000becc9f89f
+
     else:
         print('Wrong validation setting. Must either be cv, loso, full_prediction, or list_pred (with list of string IDs provided in the --test_id_list argument).')
     '''

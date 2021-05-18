@@ -687,7 +687,7 @@ if __name__ == "__main__":
     parser.add_argument('--use_nn_val', help="Use neural net instead of svm for func pred validation", action='store_true')
     parser.add_argument('--save_only', help="Only create features/associated labels/trial splits for use in cross validation (one spec only for now)", action='store_true')
     parser.add_argument('--num_hyperparam_sets', type=int, help="For using neural networks on original features, gives number of models to train in the hyperparameter search.")
-    parser.add_argument('--arch_set', type=str, help="What architecture hyperparam sets to search through for using neural networks on original features (accepted values are for bacteria ('bac') or eukaryotes ('euk'))")
+    parser.add_argument('--arch_set', type=str, default='euk', help="What architecture hyperparam sets to search through for using neural networks on original features (accepted values are for bacteria ('bac') or eukaryotes ('euk'))")
     parser.add_argument('--n_trials', type=int, default=5, help="Number of trials for cv")
     parser.add_argument('--version', type=int, default=5, help="Version of leftout matrix to load (only in loso validation)")
     parser.add_argument('--subsample', help="Randomly sample one-spec-cross-val to have same amount of training samples as only having one species. Used to measure effect of diversity of training examples on performance.", action='store_true')

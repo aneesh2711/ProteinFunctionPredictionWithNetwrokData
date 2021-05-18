@@ -962,11 +962,11 @@ def train_and_predict_all_orgs(X, y, X_to_pred, pred_protein_names, go_terms, ke
     if arch_set == 'bac':
         # for bacteria
         print("RUNNING MODEL ARCHITECTURE FOR BACTERIA")
-        params = BAC_PARAMS
+        params = BAC_PARAMS_NO_SEARCH
     elif arch_set == 'euk':
         # for eukaryotes
         print("RUNNING MODEL ARCHITECTURES FOR EUKARYOTES")
-        params = EUK_PARAMS
+        params = EUK_PARAMS_NO_SEARCH
     else:
         print('No arch_set chosen! Need to specify in order to know which hyperparameter sets to search through for cross-validation using neural networks with original features.')
 

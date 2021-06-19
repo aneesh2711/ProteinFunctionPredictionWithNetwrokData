@@ -16,7 +16,7 @@ from go_anchestor import get_gene_ontology,get_anchestors
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--data_path', type=str, default="../../data/", help="path storing data.")
-parser.add_argument('--species', type=str, default="human", help="which species to use.")
+parser.add_argument('--species', type=str, default="yeast", help="which species to use.")
 args = parser.parse_args()
 
 

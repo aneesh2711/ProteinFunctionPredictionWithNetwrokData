@@ -92,7 +92,7 @@ for idxx in range(FLAGS.net_nums):
 	temp_path = './emb/'+FLAGS.org+'_'+str_nets[idxx]+'_emb_semiAE.txt'
 	write_encoded_file(emb[idxx], temp_path)
 
-perf = cross_validation(emb, labels)
+perf = evaluate_performance(emb, labels,labels)
 
 print ("Average (over trials) of DeepMNE: m-AUPR = %0.3f, M-AUPR = %0.3f, F1 = %0.3f, Acc = %0.3f" 
 	% (np.mean(perf['pr_micro']), np.mean(perf['pr_macro']), np.mean(perf['fmax']), np.mean(perf['acc'])))
